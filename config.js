@@ -15,7 +15,7 @@ const fm = require('front-matter');
 module.exports = {
   locals: {
     company: {
-      name: 'Spacely Space Sprockets, Inc.'
+      name: 'master.crm' 
     }
   },
   events: {
@@ -28,8 +28,7 @@ module.exports = {
           if (err) throw err;
 
           const content = fm(data).attributes;
-          console.log(file);
-
+          
           fs.writeFile(path.join(filePath.dir, `${filePath.name}.json`), JSON.stringify(content), (err) => {
               if (err) throw err;
             });
