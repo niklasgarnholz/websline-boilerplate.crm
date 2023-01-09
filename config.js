@@ -8,6 +8,9 @@
 | the fastest build time, since most transformations are disabled.
 |
 */
+const fs = require('fs');
+const path = require('path');
+const fm = require('front-matter');
 
 module.exports = {
   locals: {
@@ -16,9 +19,22 @@ module.exports = {
     }
   },
   events: {
-    async beforeRender(html, config) {
+    afterBuild(files) {
+      files.forEach(file => {
+        const filePath = path.parse(file)
+        const type = filePath.dir.replace('dist/','')
 
-      return html
+        fs.readFile(path.join('src/templates', type, filePath.base ), 'utf8', (err, data) => {
+          if (err) throw err;
+
+          const content = fm(data).attributes;
+          console.log(file);
+
+          fs.writeFile(path.join(filePath.dir, `${filePath.name}.json`), JSON.stringify(content), (err) => {
+              if (err) throw err;
+            });
+        })
+      }); 
     }
   },
   build: {
@@ -41,3 +57,7 @@ module.exports = {
     ]
   },
 }
+
+
+
+
