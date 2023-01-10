@@ -36,9 +36,16 @@ module.exports = {
       }); 
     }
   },
+  inlineCSS: true,
+  removeUnusedCSS: true,
   build: {
     layouts: {
       root: 'src/layouts'
+    },
+    tailwind: {
+      css: 'src/css/tailwind.css',
+      config: 'tailwind.config.js',
+      compiled: ''
     }, 
     templates: [
       {

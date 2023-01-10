@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "maizzle serve & node ./helper.js",
-    "production": "maizzle build production"
+    "production": "maizzle build"
   },
   "dependencies": {
     "@maizzle/framework": "^4.3.1",
